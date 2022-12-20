@@ -1,0 +1,74 @@
+Q2
+8.1 
+  rate = k1[E][S] = k2[ES] = k3[ES]
+  E+S <-> ES (Enzyme Substrate binding)
+  ES -> E + P (Irreversible Catalytic Step)
+  
+  1. Rate of changes for E
+     k2=k-1 = [E][S]/ [ES]
+     k3 = [E][P] / [ES]
+     [E] = k2[ES] / [S] = k1[S]/[ES] = k3[ES]/[E][P]
+     rate of change = d[E]/dt = -k1[E][S] + k2[ES] + k3[ES]
+                              = -k1[E][S] + (k2+k3)[ES]
+  2. Rate of changes for S
+     k2 = k-1 = [E][S]/[ES]
+     [S] = k2[ES] / [S] = k1[S]/[ES]
+     rate of change = d[S]/dt = -k1[E][S] + k2[ES]
+     
+  3. Rate of changes for ES
+     k1 = k-2 = [ES]/[E][S] 
+     k-3 = [ES]/[E][P] 
+     rate of change = d[ES]/dt = k1[E][S] - k2[ES] - k3[ES]
+                               = k1[E][S] - (k2+k3)[ES]
+                              
+  4. Rate of changes for P
+     k3 = [E][P] / [ES]
+     rate of change = d[P]/dt = k3[ES]
+
+8.2 (only partial working)
+  RK 4th Order Method: y1 = y0 + (h/6)(k1 + 2k2 + 2k3 + k4) 
+                       x1 = x0 + h
+                       k1 = hf(x0, y0)
+                       k2 = hf(x0 + h/2, y0 + h(k1/2)
+                       k3 = hf (x0 + h/2, y0 + h(k2/2)
+                       k4 = hf (x0 + h, y0 + h(k3)) 
+                       
+  Initial Concentrations: E = 1uM , S = 10uM, ES & P = 0
+                          k1 = 100/(uM*min) , k2 = 600/min, k3 = 150/min
+  Python Coding:
+  #function for solving
+  def f(x,y):
+      return x+y
+      
+  #function for RK4 method
+  #x0 and y0: initial condition in the RK4 method formula
+  # step: number of finite step prior to obtaining the x1 solution
+  def rk4 (x0, x0, x1, step): 
+      h = (x1 - x0)/step #calculation of step size
+      
+      print ('\n Solution: ')
+      print ('x0 \t y0 \t y1') #column labels
+      
+      #loop for the calculation using rk4 equations
+      for i in range (step): 
+          k1 = h*(f(x0,y0)) #equation of k1
+          k2 = h*(f((x0 + h/2), (y0+k1/2))) #equation of k2
+          k3 = h*(f((x0 + h/2), (y0+k2//2))) #equation of k3
+          k4 = h*(f((x0 + h), (y0 + k3))) #equation of k4
+          k = (k1+(2*k2)+(2*k3)+k4)/6 
+          yn = y0 + k
+          print ('%.3f \t%.3f \t%.f'% (x0, y0, yn))
+          y0 = yn 
+          x0 += h
+  #inputs 
+  print ('Enter initial concentration')
+  x0 = int(input('x0 = ')
+  y0 = int(input('y0 = ')
+  print ('Enter initial k constant')
+  xn = float(input 'xn = ')
+  print ('Enter number of steps: ')
+  step = int(input('Number of steps = '))
+  
+  rk4(x0,y0,xn,step) #appying the function
+  
+8.3 (blank)

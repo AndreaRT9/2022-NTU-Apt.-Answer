@@ -36,6 +36,7 @@ Q2
   Initial Concentrations: E = 1uM , S = 10uM, ES & P = 0
                           k1 = 100/(uM*min) , k2 = 600/min, k3 = 150/min
   Python Coding:
+  #adapted from https://www.codesansar.com/numerical-methods/runge-kutta-fourth-order-rk4-python-program.htm
   #function for solving
   def f(x,y):
       return x+y
